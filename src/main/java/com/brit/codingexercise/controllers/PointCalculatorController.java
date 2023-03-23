@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @RestController
 public class PointCalculatorController {
 
     @PostMapping("/calculate-points")
-    public ArrayList<PointResult> calculatePoints(@RequestBody()ArrayList<Transaction> transactions) {
-        return new ArrayList<>();
+    public List<PointResult> calculatePoints(@RequestBody() List<Transaction> transactions) {
+        return transactions.stream().map(transaction -> new PointResult(transaction.customerId, 0)).toList();
     }
 }
