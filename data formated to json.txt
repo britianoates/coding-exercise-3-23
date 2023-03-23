@@ -1,3 +1,4 @@
+[
 {"customerId":1,"date":"2023-01-01","amount":124},
 {"customerId":1,"date":"2023-01-02","amount":176},
 {"customerId":1,"date":"2023-01-03","amount":79},
@@ -55,3 +56,4 @@
 {"customerId":2,"date":"2023-03-21","amount":87},
 {"customerId":2,"date":"2023-03-22","amount":107},
 {"customerId":2,"date":"2023-03-23","amount":51}
+]
