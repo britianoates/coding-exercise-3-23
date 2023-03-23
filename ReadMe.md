@@ -1,7 +1,7 @@
 Britian Oates coding exercise
 
 
-**Requirements:
+## Requirements:
 Interview coding ASSIGNMENT--
 
 A retailer offers a rewards program to its customers, awarding points based on each recorded purchase.
@@ -11,14 +11,14 @@ A customer receives 2 points for every dollar spent over $100 in each transactio
 
 Given a record of every transaction during a three month period, calculate the reward points earned for each customer per month and total.
 
-• Solve using Spring Boot
-• Create a RESTful endpoint
-• Make up a data set to best demonstrate your solution
+• Solve using Spring Boot  
+• Create a RESTful endpoint  
+• Make up a data set to best demonstrate your solution  
 • Check solution into GitHub
 
 
 
-**Solution:
+## Solution:
 
 There is a POST endpoint called /calculate-points. It takes in a JSON array of transactions, which include customerId, date, and amount. For each customerId the response will contain that customer's total points earned. There will also be a collection of monthly points earned that shows how many points were earned in that month. 
 
@@ -85,7 +85,7 @@ curl --location 'localhost:8080/calculate-points' \
 
 ]'
 
-**Response:
+## Response:
 [
     {
         "customerId": 1,
@@ -127,6 +127,6 @@ curl --location 'localhost:8080/calculate-points' \
 
 
 
-**Possible enhancements:
-The monthly earned points could be given a year value to handle more than 12 months worth of data.
-The calculation in the controller to group customers and their monthly totals could be more elegant. The lookups for existing objects or adding new ones could be handled by a grouping method but as I explored that option it seemed harder to read.
+## Possible enhancements:
+*The monthly earned points could be given a year value to handle more than 12 months worth of data.  
+*The calculation in the controller to group customers and their monthly totals could be more elegant. The lookups for existing objects or adding new ones could be handled by a grouping method but as I explored that option it seemed harder to read.
