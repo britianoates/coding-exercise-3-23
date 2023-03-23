@@ -46,4 +46,15 @@ public class PointCalculatorControllerTestFixture {
         assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
         assertThat(result.get(0).points).isEqualTo(90);
     }
+    @Test
+    public void returnsCustomersWithPointsTotaledFromMultipleTransactions() {
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction(BigInteger.valueOf(1), 120.0),
+                new Transaction(BigInteger.valueOf(1), 110.99)
+                );
+        List<PointResult> result = controller.calculatePoints(transactions);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
+        assertThat(result.get(0).points).isEqualTo(160);
+    }
 }
