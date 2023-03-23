@@ -30,4 +30,20 @@ public class PointCalculatorControllerTestFixture {
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
     }
+
+    @Test
+    public void returnsCustomersWithPointsFromFirstRule() {
+        List<PointResult> result = controller.calculatePoints(Arrays.asList(new Transaction(BigInteger.valueOf(1), 59.12)));
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
+        assertThat(result.get(0).points).isEqualTo(9);
+    }
+
+    @Test
+    public void returnsCustomersWithPointsFromFirstAndSecondRules() {
+        List<PointResult> result = controller.calculatePoints(Arrays.asList(new Transaction(BigInteger.valueOf(1), 120.0)));
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
+        assertThat(result.get(0).points).isEqualTo(90);
+    }
 }
