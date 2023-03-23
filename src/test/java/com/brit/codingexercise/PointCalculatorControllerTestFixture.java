@@ -57,4 +57,42 @@ public class PointCalculatorControllerTestFixture {
         assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
         assertThat(result.get(0).points).isEqualTo(160);
     }
+    @Test
+    public void returnsMultipleCustomersInOrderOfCustomerId() {
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction(BigInteger.valueOf(2), 120.0),
+                new Transaction(BigInteger.valueOf(1), 150.00)
+        );
+        List<PointResult> result = controller.calculatePoints(transactions);
+        assertThat(result.size()).isEqualTo(2);
+        assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
+        assertThat(result.get(1).customerId).isEqualTo(BigInteger.valueOf(2));
+    }
+
+    @Test
+    public void returnsMultipleCustomersWithPointsTotaledFromMultipleTransactions() {
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction(BigInteger.valueOf(1), 120.0),
+                new Transaction(BigInteger.valueOf(1), 110.99),
+                new Transaction(BigInteger.valueOf(2), 150.00),
+                new Transaction(BigInteger.valueOf(2), 17.99),
+                new Transaction(BigInteger.valueOf(5), 75.99),
+                new Transaction(BigInteger.valueOf(1), 101.00),
+                new Transaction(BigInteger.valueOf(4), 15.99),
+                new Transaction(BigInteger.valueOf(3), 50.99),
+                new Transaction(BigInteger.valueOf(2), 150.00)
+        );
+        List<PointResult> result = controller.calculatePoints(transactions);
+        assertThat(result.size()).isEqualTo(5);
+        assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
+        assertThat(result.get(0).points).isEqualTo(212);
+        assertThat(result.get(1).customerId).isEqualTo(BigInteger.valueOf(2));
+        assertThat(result.get(1).points).isEqualTo(300);
+        assertThat(result.get(2).customerId).isEqualTo(BigInteger.valueOf(3));
+        assertThat(result.get(2).points).isEqualTo(0);
+        assertThat(result.get(3).customerId).isEqualTo(BigInteger.valueOf(4));
+        assertThat(result.get(3).points).isEqualTo(0);
+        assertThat(result.get(4).customerId).isEqualTo(BigInteger.valueOf(5));
+        assertThat(result.get(4).points).isEqualTo(25);
+    }
 }

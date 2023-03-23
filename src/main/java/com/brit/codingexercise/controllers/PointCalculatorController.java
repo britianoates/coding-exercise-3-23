@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @RestController
@@ -27,6 +28,7 @@ public class PointCalculatorController {
                 results.add(pointResult);
             pointResult.points += pointCalculatorService.calculatePointsEarnedByTransaction(transaction.amount);
         });
+        results.sort(Comparator.comparing(pointResult -> pointResult.customerId));
         return results;
     }
 }
