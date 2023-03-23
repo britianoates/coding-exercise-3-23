@@ -125,4 +125,17 @@ public class PointCalculatorControllerTestFixture {
         assertThat(result.get(0).monthlyEarnedPoints.get(1).month.name()).isEqualTo("MARCH");
         assertThat(result.get(0).monthlyEarnedPoints.get(1).amount).isEqualTo(90);
     }
+
+    @Test
+    public void returnsNoPointsForNegativeTransactions() {
+        List<Transaction> transactions = Arrays.asList(
+                new Transaction(BigInteger.valueOf(1), -120.0, LocalDate.of(2023, 3, 23))
+        );
+        List<PointResult> result = controller.calculatePoints(transactions);
+        assertThat(result.size()).isEqualTo(1);
+        assertThat(result.get(0).customerId).isEqualTo(BigInteger.valueOf(1));
+        assertThat(result.get(0).totalPoints).isEqualTo(0);
+        assertThat(result.get(0).monthlyEarnedPoints.size()).isEqualTo(1);
+        assertThat(result.get(0).monthlyEarnedPoints.get(0).amount).isEqualTo(0);
+    }
 }
